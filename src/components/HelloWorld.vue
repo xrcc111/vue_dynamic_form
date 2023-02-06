@@ -1,58 +1,102 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="form">
+    <el-form
+      :model="ruleForm"
+      ref="ruleForm"
+      label-width="100px"
+      class="demo-ruleForm"
+      :inline="true"
+    >
+      <div v-for="(item, index) in ruleForm.loopData" :key="index">
+        <el-form-item
+          label="名称"
+          :prop="'loopData.' + index + '.name'"
+          :rules="{
+            required: true,
+            message: '设备名称不能为空',
+            trigger: 'blur',
+          }"
+        >
+          <el-input
+            v-model="item.name"
+            placeholder="设备名称不能为空"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          label="状态"
+          :prop="'loopData.' + index + '.status'"
+          :rules="{
+            required: true,
+            message: '状态不能为空',
+            trigger: 'change',
+          }"
+        >
+          <el-select v-model="item.status" placeholder="请选择状态" clearable>
+            <el-option label="启用" :value="1"></el-option>
+            <el-option label="禁用" :value="0"></el-option>
+          </el-select>
+        </el-form-item>
+      </div>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('ruleForm')"
+          >提交</el-button
+        >
+        <el-button @click="resetForm('ruleForm')">重置</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+  components: {},
+  name: 'Form',
+  data () {
+    return {
+      ruleForm: {
+        loopData: [
+          {
+            name: '设备1',
+            status: 0
+          },
+          {
+            name: '设备2',
+            status: 1
+          },
+          {
+            name: '设备3',
+            status: 0
+          },
+          {
+            name: '设备四',
+            status: 1
+          }
+        ]
+      }
+    }
+  },
+  methods: {
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('submit!')
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
+    }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="less">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+<style lang='less' scoped>
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
