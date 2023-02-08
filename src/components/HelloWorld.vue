@@ -38,7 +38,9 @@
         </el-form-item>
       </div>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')"
+        <el-button
+          type="primary"
+          @click="submitForm('ruleForm')"
           >提交</el-button
         >
         <el-button @click="resetForm('ruleForm')">重置</el-button>
@@ -51,7 +53,7 @@
 export default {
   components: {},
   name: 'Form',
-  data () {
+  data() {
     return {
       ruleForm: {
         loopData: [
@@ -76,7 +78,7 @@ export default {
     }
   },
   methods: {
-    submitForm (formName) {
+    submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           alert('submit!')
@@ -86,7 +88,7 @@ export default {
         }
       })
     },
-    resetForm (formName) {
+    resetForm(formName) {
       this.$refs[formName].resetFields()
     }
   }
