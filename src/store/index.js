@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import count from './modules/count'
-console.log(count)
 
 Vue.use(Vuex)
 

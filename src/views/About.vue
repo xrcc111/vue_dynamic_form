@@ -1,21 +1,22 @@
 <template>
   <div class="about">
-    <h1>{{ count }}</h1>
-    <el-button type="primary" @click="handleClick">Increment</el-button>
+    <h1>总数量：{{ count }}</h1>
+    <el-button type="primary" @click="add">Increment</el-button>
+    <el-button type="primary" @click="sub(1)">Decrement</el-button>
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'About',
   computed: {
     ...mapState({ count: state => state.count.count })
   },
   methods: {
-    handleClick() {
-      console.log(this.$store.dispatch('count/incrementCount', 10))
-      this.$store.dispatch('count/incrementCount')
-    }
+    ...mapActions({
+      add: 'count/incrementCount',
+      sub: 'count/decrementCount'
+    })
   }
 }
 </script>
