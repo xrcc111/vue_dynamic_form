@@ -10,7 +10,7 @@ import { mapState, mapActions } from 'vuex'
 export default {
   name: 'About',
   computed: {
-    ...mapState({ count: state => state.count.count })
+    ...mapState(['count'])
   },
   methods: {
     ...mapActions({

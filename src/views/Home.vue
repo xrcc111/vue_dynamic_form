@@ -6,13 +6,22 @@
 </template>
 
 <script>
-// @ is an alias to /src
+import { getMenu } from '@/api'
 import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
   components: {
     HelloWorld
+  },
+  created() {
+    this._getMenu()
+  },
+  methods: {
+    async _getMenu() {
+      const res = await getMenu()
+      console.log(res)
+    }
   }
 }
 </script>
