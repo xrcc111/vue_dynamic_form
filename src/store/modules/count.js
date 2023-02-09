@@ -9,12 +9,18 @@ const getters = {}
 const actions = {
   incrementCount({ commit }) {
     commit('increment')
+  },
+  decrementCount({ commit }, data) {
+    commit('decrement', data)
   }
 }
 // mutation
 const mutations = {
   increment(state) {
-    state.count
+    state.count++
+  },
+  decrement(state, payload) {
+    state.count -= payload
   }
 }
 
@@ -25,4 +31,3 @@ export default {
   actions,
   mutations
 }
-
