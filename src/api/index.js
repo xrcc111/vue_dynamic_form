@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 export const getMenu = (data) => request({
-  url: '/',
+  url: '/menu',
   method: 'get',
   data
 })

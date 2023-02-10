@@ -6,9 +6,8 @@
 </template>
 
 <script>
-import { getMenu } from '@/api'
 import HelloWorld from '@/components/HelloWorld.vue'
-
+import { mapActions } from 'vuex'
 export default {
   name: 'Home',
   components: {
@@ -18,10 +17,9 @@ export default {
     this._getMenu()
   },
   methods: {
-    async _getMenu() {
-      const res = await getMenu()
-      console.log(res)
-    }
+    ...mapActions({
+      _getMenu: 'menu/_getMenu'
+    })
   }
 }
 </script>

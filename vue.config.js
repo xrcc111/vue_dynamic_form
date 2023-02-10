@@ -1,9 +1,10 @@
 module.exports = () => {
   return {
     devServer: {
+      port: 3000,
       proxy: {
         '/api': {
-          target: process.env.BABEL_ENV === 'development' ? 'https://www.baidu.com' : 'https://www.baidu.com',
+          target: 'http://192.168.50.192:8080/',
           ws: true,
           changeOrigin: true,
           pathRewrite: { //  /api开头的请求会去到target下请求
