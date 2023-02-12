@@ -1,8 +1,10 @@
 import { getMenu } from '@/api'
-import { GET_ROUTES } from '../type/mutation-types'
+import router from '../../router'
+import { GET_ROUTES, SET_ROUTES } from '../type/mutation-types'
 
 const state = {
-  menu: []
+  dynamicRoutes: [],
+  routes: []
 }
 
 const getters = {
@@ -13,13 +15,17 @@ const actions = {
     const res = await getMenu()
     if (res.code === 200) {
       commit('GET_ROUTES', res.data)
+      commit('SET_ROUTES', router)
     }
   }
 }
 
 const mutations = {
   [GET_ROUTES](state, payload) {
-    state.menu = [...payload]
+    state.dynamicRoutes = [...payload]
+  },
+  [SET_ROUTES](state, payload) {
+    state.routes = state.dynamicRoutes.concat(payload)
   }
 }
 
