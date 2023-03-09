@@ -1,10 +1,10 @@
 module.exports = () => {
   return {
     devServer: {
-      port: 3000,
+      port: 8080,
       proxy: {
         '/api': {
-          target: 'http://192.168.50.192:8080/',
+          target: 'http://192.168.50.192:3000/',
           ws: true,
           changeOrigin: true,
           pathRewrite: { //  /api开头的请求会去到target下请求
