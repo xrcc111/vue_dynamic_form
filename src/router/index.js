@@ -19,6 +19,11 @@ const routes = [
     path: '/other',
     name: 'Other',
     component: () => import('../views/Other.vue')
+  },
+  {
+    path: '/drag',
+    name: 'Drag',
+    component: () => import('../views/Drag.vue')
   }
 ]
 
